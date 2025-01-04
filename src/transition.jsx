@@ -1,36 +1,35 @@
-'use client';
+import { useState, useEffect } from "react";
+import { AnimatePresence } from "framer-motion";
+import { usePathname } from "next/navigation";
 
-import { useState } from 'react';
-
-import { AnimatePresence } from 'framer-motion';
-import { usePathname } from 'next/navigation';
-
-import { useLenis } from './hooks/use_lenis';
-import { useTimeOut } from './hooks/use_time_out';
-
-import { Preloader } from './preloader';
+import { Preloader } from "./preloader"; // Assuming Preloader is your loading component
 
 /** @param {import('react').PropsWithChildren<unknown>} */
 export function Transition({ children }) {
   const [isLoading, setLoading] = useState(true);
   const pathname = usePathname();
 
-  useLenis();
-  useTimeOut({
-    callback: () => {
-      setLoading(false);
-      window.scrollTo(0, 0);
-    },
-    duration: 3000,
-    deps: [],
-  });
+  // Set a timeout to simulate loading and finish transition
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false); // Set loading to false after 2 seconds
+      window.scrollTo(0, 0); // Reset scroll position (optional)
+    }, 3000); // Adjust the duration of the transition as needed
+
+    return () => clearTimeout(timer); // Clean up timeout if component unmounts
+  }, [pathname]); // Depend on pathname to trigger the effect on route change
 
   return (
-    <div key={pathname} className='overflow-hidden'>
-      <AnimatePresence mode='wait'>
-        {isLoading ? <Preloader /> : null}
+    <div key={pathname} className="overflow-hidden scroll-smooth">
+      <AnimatePresence mode="wait">
+        {isLoading && <Preloader />} {/* Show preloader while loading */}
       </AnimatePresence>
-      {children}
+      {!isLoading && (
+        <div>
+          {children}{" "}
+          {/* Render the rest of the page once loading is finished */}
+        </div>
+      )}
     </div>
   );
 }
