@@ -28,7 +28,7 @@ export function Header() {
       <img
         src="src/assets/image-removebg.png" // Replace with your image URL
         alt="Header Image"
-        className="absolute top-[5%] left-1/2 transform -translate-x-1/2 h-full z-30 object-cover"
+        className="absolute bottom-0 left-1/2 transform -translate-x-1/2 h-[50vh] sm:h-[90vh] z-30 object-cover"
       />
 
       <div className="relative flex h-full flex-col justify-center gap-2 md:flex-col-reverse md:justify-center z-20">
