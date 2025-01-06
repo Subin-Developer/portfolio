@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-
+import { MagneticButton } from "../components/common/button";
+import MenuButton from './menu_icon'
+ 
 function ScrollButton() {
   const [showButton, setShowButton] = useState(false);
   const [scale, setScale] = useState(0.2); // Start very small
@@ -28,13 +30,20 @@ function ScrollButton() {
     <>
       {showButton && (
         <motion.button
-          className="fixed top-10 right-10 bg-blue-500 text-white rounded-full flex items-center justify-center"
+          className="fixed top-10 right-10 bg-transparent text-white rounded-full flex items-center justify-center"
           style={{ zIndex: 1000, width: "60px", height: "60px" }} // Set fixed size and make it round
           animate={{ scale: scale }} // Animate the scale property
           initial={{ scale: 0.2 }} // Start with a very small scale
           transition={{ duration: 0.2 }} // Faster scaling transition
         >
-          <span className="text-xl">↑</span> {/* Up arrow icon */}
+          <MagneticButton
+            size="sm"
+            variant="ghost"
+            className="border border-solid border-muted-foreground w-16 h-16 rounded-full flex items-center justify-center"
+          >
+                                <MenuButton />
+</MagneticButton>
+
         </motion.button>
       )}
     </>

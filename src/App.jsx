@@ -2,8 +2,8 @@ import { Transition } from "./transition";
 import { Navbar } from "./navbar";
 import { Header } from "./header/index";
 import { MagneticButton } from ".../../components/common/button/index";
-import moduleName from "./button_appearance";
-import ScrollButton from "./button_appearance";
+import moduleName from "./menu/button_appearance";
+import ScrollButton from "./menu/button_appearance";
 
 function App() {
   return (
